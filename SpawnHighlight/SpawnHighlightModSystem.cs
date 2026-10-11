@@ -106,8 +106,8 @@ namespace SpawnHighlight
                     if (!HasRoomForMob(insideBlock, spawnPosition)) return;
 
                     // Same checks as SystemTemporalStability.CanSpawnNearby: light is measured where the mob stands
-                    var blockLight = blockAccessor.GetLightLevel(spawnPosition, EnumLightLevelType.OnlyBlockLight);
-                    var sunLight = blockAccessor.GetLightLevel(spawnPosition, EnumLightLevelType.OnlySunLight);
+                    var blockLight = api.World.BlockAccessor.GetLightLevel(spawnPosition, EnumLightLevelType.OnlyBlockLight);
+                    var sunLight = api.World.BlockAccessor.GetLightLevel(spawnPosition, EnumLightLevelType.OnlySunLight);
 
                     positions.Add(blockPosition);
                     if (blockLight > MaxSpawnLightLevel) colors.Add(config.SafeColor);
