@@ -45,6 +45,13 @@ namespace SpawnHighlight
                     .WithDescription("Set color for zones where mobs can spawn")
                     .WithArgs(p.Word("color"))
                     .HandleWith(SpawnColorCommand)
+                .EndSubCommand()
+
+                .BeginSubCommand("riftcolor")
+                    .WithAlias("rc")
+                    .WithDescription("Set color for dark zones under open sky, where mobs only spawn near rifts")
+                    .WithArgs(p.Word("color"))
+                    .HandleWith(RiftColorCommand)
                 .EndSubCommand();
         }
 
@@ -90,6 +97,20 @@ namespace SpawnHighlight
             }
 
             config.SetSpawnableColor(color);
+            config.Save(api);
+
+            return TextCommandResult.Success();
+        }
+
+        private TextCommandResult RiftColorCommand(TextCommandCallingArgs args)
+        {
+            var color = (string)args[0];
+            if (!Reg.colorRegex.IsMatch(color))
+            {
+                return TextCommandResult.Error($"{color} is not a valid hex color. Write color in format #RRGGBB or #RRGGBBAA");
+            }
+
+            config.SetRiftColor(color);
             config.Save(api);
 
             return TextCommandResult.Success();

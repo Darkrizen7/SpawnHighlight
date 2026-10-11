@@ -62,6 +62,14 @@ namespace SpawnHighlight
             data.SpawnableColor = color;
         }
 
+        public int RiftColor { get; private set; }
+
+        public void SetRiftColor(string color)
+        {
+            RiftColor = ParseColor(color);
+            data.RiftColor = color;
+        }
+
         public string HotkeyDescriptionString => Lang.Get($"{ModId}:hotkeyDescription");
         public string EnabledString(bool enabled) => Lang.Get(enabled ? $"{ModId}:disable" : $"{ModId}:enable");
 
@@ -73,6 +81,7 @@ namespace SpawnHighlight
             public int Radius;
             public string SafeColor;
             public string SpawnableColor;
+            public string RiftColor;
         }
 
         public void Save(ICoreClientAPI api)
@@ -97,9 +106,12 @@ namespace SpawnHighlight
                 SafeColor = "#00FF0020",
                 SpawnableColor = "#FF000020",
             };
+            // Configs written by older versions have no rift color
+            config.RiftColor ??= "#FFFF0020";
 
             SafeColor = ParseColor(config.SafeColor);
             SpawnableColor = ParseColor(config.SpawnableColor);
+            RiftColor = ParseColor(config.RiftColor);
 
             return config;
         }

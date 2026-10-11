@@ -2,12 +2,12 @@
   "type": "code",
   "modid": "spawnhighlight",
   "name": "Spawn Highlight",
-  "authors": ["MistAway"],
+  "authors": ["MistAway", "Darkrizen"],
   "description": "Client-side highlight of hostile mob spawn locations",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "side": "Client",
   "requiredOnServer": false,
   "dependencies": {
-    "game": ""
+    "game": "1.22.0"
   }
 }
